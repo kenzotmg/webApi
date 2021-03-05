@@ -1,19 +1,31 @@
 package com.example.restservice;
 
-import java.util.concurrent.atomic.AtomicLong;
 
+import java.util.LinkedList;
+
+import org.openqa.selenium.WebDriver;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 @RestController
 public class GreetingController {
 
-	private static final String template = "Hello, %s!";
-	private final AtomicLong counter = new AtomicLong();
-
-	@GetMapping("/greeting")
-	public Greeting greeting(@RequestParam(value = "name", defaultValue = "World") String name) {
-		return new Greeting(counter.incrementAndGet(), String.format(template, name));
+	@Autowired
+	WebDriver driver;
+	
+	@SuppressWarnings("unchecked")
+	@GetMapping("/")
+	public String produto(@RequestParam("produto")String nomeProduto) throws JsonProcessingException, InterruptedException {
+		ObjectMapper mapper = new ObjectMapper();
+		Produto produto = new Produto();
+		LinkedList<Produto> resultados = new LinkedList<>();
+		resultados = produto.getProdutos(nomeProduto, driver);
+		return mapper.writerWithDefaultPrettyPrinter().writeValueAsString(resultados);
 	}
+	
 }
