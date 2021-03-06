@@ -19,8 +19,9 @@ public class RestServiceApplication {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--no-sandbox");
         options.addArguments("--headless");
-        options.addArguments("window-size=1920x1080");
+        options.addArguments("--disable-dev-shm-usage");
         options.addArguments("--disable-gpu");
+        options.addArguments("window-size=1920x1080");
         //options.setBinary(System.getenv("GOOGLE_CHROME_BIN"));
 		WebDriver driver = new ChromeDriver(options);
 		System.out.println("Chrome instance created!");
