@@ -15,7 +15,7 @@ public class RestServiceApplication {
     }
     @Bean
     public WebDriver webDriver() {
-    	System.setProperty("webdriver.chrome.driver",System.getenv("GOOGLE_CHROME_BIN"));
+    	System.setProperty("webdriver.chrome.driver",System.getenv("GOOGLE_CHROME_SHIM"));
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--no-sandbox");
         options.addArguments("--headless");
