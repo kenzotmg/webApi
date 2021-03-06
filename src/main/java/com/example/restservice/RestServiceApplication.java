@@ -17,6 +17,7 @@ public class RestServiceApplication {
     public WebDriver webDriver() {
     	System.setProperty("webdriver.chrome.driver",System.getenv("GOOGLE_CHROME_SHIM"));
         ChromeOptions options = new ChromeOptions();
+        options.setBinary(System.getenv("GOOGLE_CHROME_BIN"));
         options.addArguments("--no-sandbox");
         options.addArguments("--headless");
         options.addArguments("--disable-dev-shm-usage");
