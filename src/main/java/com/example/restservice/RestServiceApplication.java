@@ -15,7 +15,6 @@ public class RestServiceApplication {
     }
     @Bean
     public WebDriver webDriver() {
-    	System.setProperty("webdriver.chrome.driver",System.getenv("GOOGLE_CHROME_SHIM"));
         ChromeOptions options = new ChromeOptions();
         options.setBinary(System.getenv("GOOGLE_CHROME_BIN"));
         options.addArguments("--no-sandbox");
@@ -23,7 +22,6 @@ public class RestServiceApplication {
         options.addArguments("--disable-dev-shm-usage");
         options.addArguments("--disable-gpu");
         options.addArguments("window-size=1920x1080");
-        //options.setBinary(System.getenv("GOOGLE_CHROME_BIN"));
 		WebDriver driver = new ChromeDriver(options);
 		System.out.println("Chrome instance created!");
         return driver;
