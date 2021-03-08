@@ -88,7 +88,15 @@ public class Produto {
 		
 		if(isEmpty != true) {
 			//PEGAR A DIV DOS RESULTADOS
-				WebElement divResultados = (new WebDriverWait(driver, 10)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//body/div[@id='__next']/div[2]/div[1]/div[3]/div[1]")));
+				WebElement divResultados =driver.findElement(By.xpath("//body/div[@id='__next']/div[2]/div[1]/div[3]/div[1]"));
+				WebElement divResultados1 = driver.findElement(By.xpath("//body/div[@id='__next']/div[2]/div[1]/div[3]/div[2]"));
+				boolean productsLoaded = false;
+				do {
+					if(divResultados.getAttribute("class").contains("ProductsContainer") || divResultados1.getAttribute("class").contains("ProductsContainer")){
+						productsLoaded = true;
+					}
+					Thread.sleep(200);
+				}while(!productsLoaded);
 				List<WebElement> resultadosIndividuais = divResultados.findElements(By.cssSelector("div[wrap=wrap] > div"));
 				
 				//ITERAR PELA LISTA DE RESULTADOS
