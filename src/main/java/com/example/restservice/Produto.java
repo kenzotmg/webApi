@@ -60,18 +60,18 @@ public class Produto {
 	public LinkedList getProdutos(String produto, WebDriver driver) throws InterruptedException { 
 		LinkedList<Produto> produtos = new LinkedList<>();
 		
-		String url = "https://www.supermercadonow.com/produtos/supermercado-hirota-aclimacao/";
+		String url = "https://www.supermercadonow.com/produtos/supermercado-hirota-aclimacao/busca/" + produto;
 		driver.get(url);
 		
-		//PROCURAR SEARCH BAR
-		WebElement buscarProduto = driver.findElement(By.xpath("//body/div[@id='__next']/div[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/input[1]"));
-		WebDriverWait wait = new WebDriverWait(driver, 20);
-		wait.until(ExpectedConditions.visibilityOf(buscarProduto)); 
-		wait.until(ExpectedConditions.elementToBeClickable(buscarProduto));
-		
-		//BUSCAR PRODUTO
-		buscarProduto.sendKeys(produto);
-		
+		/*
+		 * //PROCURAR SEARCH BAR WebElement buscarProduto = driver.findElement(By.xpath(
+		 * "//body/div[@id='__next']/div[2]/div[1]/div[1]/div[1]/div[1]/div[3]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/input[1]"
+		 * )); WebDriverWait wait = new WebDriverWait(driver, 20);
+		 * wait.until(ExpectedConditions.visibilityOf(buscarProduto));
+		 * wait.until(ExpectedConditions.elementToBeClickable(buscarProduto));
+		 * 
+		 * //BUSCAR PRODUTO buscarProduto.sendKeys(produto);
+		 */
 		
 		//ESPERAR A PAGINA CARREGAR COMPLETAMENTE
 		boolean pageLoaded = false;
@@ -88,7 +88,7 @@ public class Produto {
 		
 		if(isEmpty != true) {
 			//PEGAR A DIV DOS RESULTADOS
-				WebElement divResultados = (new WebDriverWait(driver, 10)).until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("div.styles__ProductsContainer-sc-5q6t96-3")));
+				WebElement divResultados = (new WebDriverWait(driver, 10)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//body/div[@id='__next']/div[2]/div[1]/div[3]/div[1]")));
 				List<WebElement> resultadosIndividuais = divResultados.findElements(By.cssSelector("div[wrap=wrap] > div"));
 				
 				//ITERAR PELA LISTA DE RESULTADOS
